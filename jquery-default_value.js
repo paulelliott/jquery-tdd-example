@@ -1,35 +1,31 @@
 (function($) {
   $.fn.extend({
     default_value: function(value) {
-      return this.each(function() {
-        var input = $(this);
+      var inputs = this.data("default-value", value).
+        focus(clearDefault).
+        blur(applyDefault);
 
-        input.filter("[value='']").val(value);
+      inputs.filter("[value='']").val(value);
 
-        input.focus(function() {
-          clearDefault(this, value);
-        });
-
-        input.blur(function() {
-          applyDefault(this, value);
-        });
-
-        input.closest("form").submit(function() {
-          clearDefault(input[0], value);
-        });
+      inputs.closest("form").submit(function() {
+        inputs.each(clearDefault);
       });
+
+      return inputs;
     }
   });
 
-  function applyDefault(input, defaultValue) {
-    if (input.value === "") {
-      input.value = defaultValue;
+  function applyDefault() {
+    var input = $(this);
+    if (input.val() === "") {
+      input.val(input.data("default-value"));
     }
   }
 
-  function clearDefault(input, defaultValue) {
-    if (input.value === defaultValue) {
-      input.value = "";
+  function clearDefault() {
+    var input = $(this);
+    if (input.val() === input.data("default-value")) {
+      input.val("");
     }
   }
 
