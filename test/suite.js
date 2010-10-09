@@ -4,7 +4,7 @@ $(function() {
     equals($("#test_input").default_value("").val(), "");
   });
 
-  test("it has the default value when applied", function() {
+  test("it applies the default to fields without values", function() {
     $("#test_input").default_value("Occupation");
     equals($("#test_input").val(), "Occupation");
   });
