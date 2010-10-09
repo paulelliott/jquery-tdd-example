@@ -9,6 +9,12 @@
         }
       });
 
+      this.blur(function() {
+        if (this.value === '') {
+          this.value = value;
+        }
+      });
+
       return this;
     }
   });
