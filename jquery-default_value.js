@@ -1,21 +1,31 @@
 (function($) {
   $.fn.extend({
     default_value: function(value) {
-      this.filter("[value='']").val(value);
+      return this.each(function() {
+        var input = $(this);
 
-      this.focus(function() {
-        if (this.value === value) {
-          this.value = "";
-        }
+        input.filter("[value='']").val(value);
+
+        input.focus(function() {
+          clearValue(this, value);
+        });
+
+        input.blur(function() {
+          if (this.value === '') {
+            this.value = value;
+          }
+        });
+
+        input.closest("form").submit(function() {
+          clearValue(input[0], value);
+        });
       });
-
-      this.blur(function() {
-        if (this.value === '') {
-          this.value = value;
-        }
-      });
-
-      return this;
     }
   });
+
+  function clearValue(input, defaultValue) {
+    if (input.value === defaultValue) {
+      input.value = "";
+    }
+  }
 })(jQuery);
