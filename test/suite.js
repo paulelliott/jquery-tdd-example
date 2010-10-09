@@ -14,4 +14,10 @@ $(function() {
     equals($("#test_input").val(), "Special Operations");
   });
 
+  test("it clears on focus when the default value is present", function() {
+    $("#test_input").default_value("Name");
+    $("#test_input").focus();
+    equals($("#test_input").val(), "");
+  });
+
 });
