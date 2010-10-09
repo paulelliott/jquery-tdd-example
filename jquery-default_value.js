@@ -1,7 +1,7 @@
 (function($) {
   $.fn.extend({
     default_value: function(value) {
-      this.val(value);
+      this.filter("[value='']").val(value);
 
       return this;
     }
