@@ -38,4 +38,10 @@ $(function() {
     equals($("#test_input").val(), "Corbin Dallas");
   });
 
+  test("it clears the default value when the form is submitted", function() {
+    $("#test_input").default_value("Name");
+    $("form").submit(function() { return false; }).submit();
+    equals($("#test_input").val(), "");
+  });
+
 });
