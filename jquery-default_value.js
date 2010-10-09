@@ -7,25 +7,30 @@
         input.filter("[value='']").val(value);
 
         input.focus(function() {
-          clearValue(this, value);
+          clearDefault(this, value);
         });
 
         input.blur(function() {
-          if (this.value === '') {
-            this.value = value;
-          }
+          applyDefault(this, value);
         });
 
         input.closest("form").submit(function() {
-          clearValue(input[0], value);
+          clearDefault(input[0], value);
         });
       });
     }
   });
 
-  function clearValue(input, defaultValue) {
+  function applyDefault(input, defaultValue) {
+    if (input.value === "") {
+      input.value = defaultValue;
+    }
+  }
+
+  function clearDefault(input, defaultValue) {
     if (input.value === defaultValue) {
       input.value = "";
     }
   }
+
 })(jQuery);
