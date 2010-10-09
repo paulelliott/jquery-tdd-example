@@ -20,4 +20,9 @@ $(function() {
     equals($("#test_input").val(), "");
   });
 
+  test("it does not clear on focus when a value is present", function() {
+    $("#test_input").val("Corbin Dallas").default_value("Name");
+    $("#test_input").focus();
+    equals($("#test_input").val(), "Corbin Dallas");
+  });
 });
