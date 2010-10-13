@@ -32,4 +32,10 @@ $(function() {
     equals($("#test_input").val(), "Name");
   });
 
+  test("it does not apply the default value on blur when a value is present", function() {
+    $("#test_input").default_value("Name").val("Corbin Dallas");
+    $("#test_input").blur();
+    equals($("#test_input").val(), "Corbin Dallas");
+  });
+
 });
